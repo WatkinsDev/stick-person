@@ -32,7 +32,7 @@ predicted_heatmap = pose_net(pose_input)
 pred_coords, confidence = heatmap_to_coord_alpha_pose(predicted_heatmap, upscale_bbox)
 
 ax = utils.viz.plot_keypoints(
-    255 * np.ones([x.shape[2], x.shape[3]], np.uint8),
+    np.ones_like(img),
     pred_coords,
     confidence,
     class_IDs,
