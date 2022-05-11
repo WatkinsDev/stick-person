@@ -7,6 +7,7 @@ lines of code.
 First let's import some necessary libraries:
 """
 import cv2
+import numpy as np
 from email.mime import image
 from matplotlib import pyplot as plt
 from gluoncv import model_zoo, data, utils
@@ -31,19 +32,19 @@ predicted_heatmap = pose_net(pose_input)
 pred_coords, confidence = heatmap_to_coord_alpha_pose(predicted_heatmap, upscale_bbox)
 
 ax = utils.viz.plot_keypoints(
-    img,
+    255 * np.ones([x.shape[2], x.shape[3]], np.uint8),
     pred_coords,
     confidence,
     class_IDs,
     bounding_boxs,
     scores,
-    box_thresh=0.1,
+    box_thresh=0.9999999999999,
     keypoint_thresh=0.2,
 )
 ax.set_axis_off()
-plt.show()
+# plt.show()
 output_path = "./frames_output/img-0001.png"
-plt.savefig(output_path)
+plt.savefig(output_path, bbox_inches="tight", pad_inches=0)
 
 # fig.savefig(fname, dpi)
 
