@@ -46,38 +46,26 @@ contours = np.array([[x_min, y_min], [x_max, y_min], [x_max, y_max], [x_min, y_m
 # cv2.fillPoly(img, pts=[contours], color=(255, 255, 255))
 # cv2.imwrite(output_path, img)
 
-stencil = np.zeros(img.shape).astype(img.dtype)
+# stencil = np.zeros(img.shape, 4).astype(img.dtype)
+# color = [255, 255, 255, 0]
+# cv2.fillPoly(stencil, [contours], color)
+# result = cv2.bitwise_and(img, stencil)
+
+stencil = np.zeros((img.shape[0], img.shape[1])).astype(img.dtype)
 color = [255, 255, 255]
 cv2.fillPoly(stencil, [contours], color)
 result = cv2.bitwise_and(img, stencil)
+
 cv2.imwrite(output_path, result)
+print("Wrote first ball")
 
-# Show
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
-
-# CODE FOR READING IMAGES AND WRITING THEM
-# from cartoonizer import cartoonize
-# import cv2
-# import os
-# import time
-
-# in_dir = './imgs/input'
-# out_dir = './imgs/output'
-
-# os.mkdir(out_dir)
-
-# for f in os.listdir(in_dir):
-#     image = cv2.imread(os.path.join(in_dir, f))
-#     print('==============')
-#     print(f)
-#     start_time = time.time()
-#     output = cartoonize(image)
-#     end_time = time.time()
-#     print("time: {0}s".format(end_time-start_time))
-#     name = os.path.basename(f)
-#     tmp = os.path.splitext(name)
-#     name = tmp[0]+"_cartoon" + tmp[1]
-#     name = os.path.join(out_dir, name)
-#     print("write to {0}".format(name))
-#     cv2.imwrite(name, output)
+img2 = cv2.imread(output_path)
+# threshold on black to make a mask
+color = (0, 0, 0)
+mask = np.where((img2 == color).all(axis=2), 0, 255).astype(np.uint8)
+# put mask into alpha channel
+result = img2.copy()
+result = cv2.cvtColor(result, cv2.COLOR_BGR2BGRA)
+result[:, :, 3] = mask
+# save resulting masked image
+cv2.imwrite("./frames_output/img-0001_ball_without_black.png", result)
