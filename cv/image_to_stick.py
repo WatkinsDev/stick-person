@@ -43,7 +43,7 @@ ax = utils.viz.plot_keypoints(
 )
 ax.set_axis_off()
 # plt.show()
-output_path = "./frames_output/img-0001.png"
+output_path = "./frames_output/img-0001_stick.png"
 plt.savefig(output_path, bbox_inches="tight", pad_inches=0)
 
 # fig.savefig(fname, dpi)

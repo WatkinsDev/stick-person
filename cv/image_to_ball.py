@@ -32,7 +32,7 @@ print(objects_detected[objects_detected.name == "sports ball"])
 
 # Load an color image in grayscale
 img = cv2.imread(img_path, 0)
-output_path = "./frames_output/img-0001.png"
+output_path = "./frames_output/img-0001_ball.png"
 
 # show image
 x_min = 1818  # 1818.487915  # 50
