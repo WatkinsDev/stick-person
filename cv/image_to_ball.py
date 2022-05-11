@@ -1,28 +1,41 @@
 # CODE FOR BALL DETECTION
 
+import cv2
 import torch
+from matplotlib import pyplot as plt
 
 # Model
 model = torch.hub.load("ultralytics/yolov5", "yolov5s")  # or yolov5n - yolov5x6, custom
 
 # Images
-img = "./frames/img-0001.png"
+img_path = "./frames/img-0001.png"
 
 # Inference
-results = model(img)
+results = model(img_path)
 
 # Results
 # results.print()
-results.show()
+# results.show()
 # results.crop()
 # results.save()
 # results.pandas()
+
+print("type(results)")
+print(type(results))
+
 objects_detected = results.pandas().xyxy[0]
 print("pandas_val.xyxy[0]")
 print(objects_detected)
 print("just sports ball")
 print(objects_detected[objects_detected.name == "sports ball"])
 
+# Load an color image in grayscale
+img = cv2.imread(img_path, 0)
+
+# show image
+cv2.imshow("image", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 # CODE FOR READING IMAGES AND WRITING THEM
 # from cartoonizer import cartoonize
