@@ -6,7 +6,8 @@ lines of code.
 
 First let's import some necessary libraries:
 """
-
+import cv2
+from email.mime import image
 from matplotlib import pyplot as plt
 from gluoncv import model_zoo, data, utils
 from gluoncv.data.transforms.pose import (
@@ -36,7 +37,28 @@ ax = utils.viz.plot_keypoints(
     class_IDs,
     bounding_boxs,
     scores,
-    box_thresh=0.99999999999,
+    box_thresh=0.1,
     keypoint_thresh=0.2,
 )
+ax.set_axis_off()
 plt.show()
+output_path = "./frames_output/img-0001.png"
+plt.savefig(output_path)
+
+# fig.savefig(fname, dpi)
+
+# print("type(ax)")
+# print(type(ax))
+# # print(x.shape[2])
+# # print(x.shape[3])
+# # image_q = utils.viz.expand_mask(
+# #     pred_coords,
+# #     bounding_boxs,
+# #     (x.shape[2], x.shape[3]),
+# #     scores=scores,
+# #     thresh=0.5,
+# #     scale=1.0,
+# #     sortby=None,
+# # )
+# # print(type(image_q))
+# cv2.imwrite(output_path, ax)
