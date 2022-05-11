@@ -1,3 +1,5 @@
 frames/**
+frames_wip/**
+frames_output/**
 input/**
 yolov5s.pt
