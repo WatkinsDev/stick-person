@@ -21,7 +21,7 @@ def image_to_stick(file_number):
     print("Shape of pre-processed image:", x.shape)
 
     class_IDs, scores, bounding_boxs = detector(x)
-    output_path = f"./frames_output/img-{file_number}_stick.png"
+    output_path = f"./frames_wip/img-{file_number}_stick.png"
 
     try:
         pose_input, upscale_bbox = detector_to_alpha_pose(

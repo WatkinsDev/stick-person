@@ -10,6 +10,9 @@ for path in os.listdir(dir_path):
         count += 1
         file_number = str(count).zfill(4)
 
+        print("")
+        print("")
+        print("")
         print(f"Running process for file #{file_number}")
         image_to_ball(file_number)
         image_to_stick(file_number)

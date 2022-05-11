@@ -1,5 +1,6 @@
 frames/**
-frames_wip/**
 frames_output/**
+frames_wip/**
 input/**
 yolov5s.pt
+**/__pycache__/**

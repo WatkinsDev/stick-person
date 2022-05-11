@@ -44,7 +44,7 @@ def image_to_ball(file_number):
     except:
         result = np.zeros_like(img)
 
-    output_path = f"./frames_output/img-{file_number}_ball.png"
+    output_path = f"./frames_wip/img-{file_number}_ball.png"
     cv2.imwrite(output_path, result)
 
     img2 = cv2.imread(output_path)
@@ -56,4 +56,4 @@ def image_to_ball(file_number):
     result = cv2.cvtColor(result, cv2.COLOR_BGR2BGRA)
     result[:, :, 3] = mask
     # save resulting masked image
-    cv2.imwrite(f"./frames_output/img-{file_number}_ball_without_black.png", result)
+    cv2.imwrite(f"./frames_wip/img-{file_number}_ball_without_black.png", result)

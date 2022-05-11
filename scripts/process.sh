@@ -1,1 +1,1 @@
-python cv/image_to_stick.py
+python cv/image_process.py
