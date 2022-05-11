@@ -40,16 +40,7 @@ y_min = 1634  # 1634.062988  # 50
 x_max = 2044  # 2044.704834  # 150
 y_max = 1859  # 1859.912964  # 150
 
-# contours = np.array([[50, 50], [50, 150], [150, 150], [150, 50]])
 contours = np.array([[x_min, y_min], [x_max, y_min], [x_max, y_max], [x_min, y_max]])
-
-# cv2.fillPoly(img, pts=[contours], color=(255, 255, 255))
-# cv2.imwrite(output_path, img)
-
-# stencil = np.zeros(img.shape, 4).astype(img.dtype)
-# color = [255, 255, 255, 0]
-# cv2.fillPoly(stencil, [contours], color)
-# result = cv2.bitwise_and(img, stencil)
 
 stencil = np.zeros((img.shape[0], img.shape[1])).astype(img.dtype)
 color = [255, 255, 255]
