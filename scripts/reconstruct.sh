@@ -1,7 +1,6 @@
 # Images to video
 cd ./frames_output
-rm *.mp4; 
-ffmpeg -framerate 2 -i img-%*.png -s:v 1280x720 -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p stick_person.mp4; 
+ffmpeg -framerate 25 -i img-%*.png -s:v 1280x720 -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p ../output/stick_person.mp4; 
 # ffmpeg -framerate 25 -i img-%*.png -s:v 1280x720 -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p stick_person.mp4; 
 
 # Strip Audio
