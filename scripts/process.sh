@@ -1,0 +1,1 @@
+python cv/image_to_stick.py
