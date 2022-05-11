@@ -19,11 +19,7 @@ pose_net = model_zoo.get_model("alpha_pose_resnet101_v1b_coco", pretrained=True)
 
 detector.reset_class(["person"], reuse_weights=["person"])
 
-im_fname = utils.download(
-    "https://pbs.twimg.com/media/EZbpQ5GXkAEiaOM.jpg",
-    path="soccer.png",
-)
-x, img = data.transforms.presets.yolo.load_test(im_fname, short=512)
+x, img = data.transforms.presets.yolo.load_test("./frames/img-0001.png", short=512)
 print("Shape of pre-processed image:", x.shape)
 
 class_IDs, scores, bounding_boxs = detector(x)
@@ -39,7 +35,6 @@ ax = utils.viz.plot_keypoints(
     confidence,
     class_IDs,
     bounding_boxs,
-    # bounding_boxs,
     scores,
     box_thresh=0.99999999999,
     keypoint_thresh=0.2,
