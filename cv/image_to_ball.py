@@ -21,32 +21,30 @@ results = model(img_path)
 # results.save()
 # results.pandas()
 
-print("type(results)")
-print(type(results))
-
 objects_detected = results.pandas().xyxy[0]
-print("pandas_val.xyxy[0]")
-print(objects_detected)
-print("just sports ball")
-print(objects_detected[objects_detected.name == "sports ball"])
-
-# Load an color image in grayscale
+sports_ball = objects_detected[objects_detected.name == "sports ball"]
 img = cv2.imread(img_path, 0)
+
+if not sports_ball.empty:
+
+    # show image
+    x_min = int(sports_ball.xmin)
+    y_min = int(sports_ball.ymin)
+    x_max = int(sports_ball.xmax)
+    y_max = int(sports_ball.ymax)
+
+    contours = np.array(
+        [[x_min, y_min], [x_max, y_min], [x_max, y_max], [x_min, y_max]]
+    )
+
+    stencil = np.zeros((img.shape[0], img.shape[1])).astype(img.dtype)
+    color = [255, 255, 255]
+    cv2.fillPoly(stencil, [contours], color)
+    result = cv2.bitwise_and(img, stencil)
+else:
+    result = np.zeros_like(img)
+
 output_path = "./frames_output/img-0001_ball.png"
-
-# show image
-x_min = 1818  # 1818.487915  # 50
-y_min = 1634  # 1634.062988  # 50
-x_max = 2044  # 2044.704834  # 150
-y_max = 1859  # 1859.912964  # 150
-
-contours = np.array([[x_min, y_min], [x_max, y_min], [x_max, y_max], [x_min, y_max]])
-
-stencil = np.zeros((img.shape[0], img.shape[1])).astype(img.dtype)
-color = [255, 255, 255]
-cv2.fillPoly(stencil, [contours], color)
-result = cv2.bitwise_and(img, stencil)
-
 cv2.imwrite(output_path, result)
 print("Wrote first ball")
 
