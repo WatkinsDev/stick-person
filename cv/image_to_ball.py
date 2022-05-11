@@ -2,6 +2,7 @@
 
 import cv2
 import torch
+import numpy as np
 from matplotlib import pyplot as plt
 
 # Model
@@ -31,11 +32,29 @@ print(objects_detected[objects_detected.name == "sports ball"])
 
 # Load an color image in grayscale
 img = cv2.imread(img_path, 0)
+output_path = "./frames_output/img-0001.png"
 
 # show image
-cv2.imshow("image", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+x_min = 1818  # 1818.487915  # 50
+y_min = 1634  # 1634.062988  # 50
+x_max = 2044  # 2044.704834  # 150
+y_max = 1859  # 1859.912964  # 150
+
+# contours = np.array([[50, 50], [50, 150], [150, 150], [150, 50]])
+contours = np.array([[x_min, y_min], [x_max, y_min], [x_max, y_max], [x_min, y_max]])
+
+# cv2.fillPoly(img, pts=[contours], color=(255, 255, 255))
+# cv2.imwrite(output_path, img)
+
+stencil = np.zeros(img.shape).astype(img.dtype)
+color = [255, 255, 255]
+cv2.fillPoly(stencil, [contours], color)
+result = cv2.bitwise_and(img, stencil)
+cv2.imwrite(output_path, result)
+
+# Show
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
 
 # CODE FOR READING IMAGES AND WRITING THEM
 # from cartoonizer import cartoonize
