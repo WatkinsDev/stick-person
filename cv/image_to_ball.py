@@ -1,20 +1,14 @@
 import cv2
-import torch
 import numpy as np
 from matplotlib import pyplot as plt
 
 
-def image_to_ball(file_number):
-    # Model
-    model = torch.hub.load(
-        "ultralytics/yolov5", "yolov5s"
-    )  # or yolov5n - yolov5x6, custom
-
+def image_to_ball(file_number, yolo_model):
     # Images
     img_path = f"./frames/img-{file_number}.png"
 
     # Inference
-    results = model(img_path)
+    results = yolo_model(img_path)
 
     # Results
     # results.print()

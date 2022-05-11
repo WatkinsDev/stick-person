@@ -1,24 +1,18 @@
 import cv2
 import numpy as np
-from email.mime import image
 from matplotlib import pyplot as plt
-from gluoncv import model_zoo, data, utils
+from gluoncv import data, utils
 from gluoncv.data.transforms.pose import (
     detector_to_alpha_pose,
     heatmap_to_coord_alpha_pose,
 )
 
 
-def image_to_stick(file_number):
-    detector = model_zoo.get_model("yolo3_mobilenet1.0_coco", pretrained=True)
-    pose_net = model_zoo.get_model("alpha_pose_resnet101_v1b_coco", pretrained=True)
-
-    detector.reset_class(["person"], reuse_weights=["person"])
-
+def image_to_stick(file_number, detector, pose_net):
     x, img = data.transforms.presets.yolo.load_test(
         f"./frames/img-{file_number}.png", short=512
     )
-    print("Shape of pre-processed image:", x.shape)
+    # print("Shape of pre-processed image:", x.shape)
 
     class_IDs, scores, bounding_boxs = detector(x)
     output_path = f"./frames_wip/img-{file_number}_stick.png"
