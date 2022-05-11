@@ -11,4 +11,4 @@ ffmpeg -framerate 25 -i img-%*.png -s:v 1280x720 -c:v libx264 -profile:v high -c
 # ffmpeg -i $2_cartoon.mp4 -i audio.wav -c:v copy -c:a aac $2_cartoon_with_audio.mp4
 
 # Play
-vlc stick_person.mp4;
+vlc ../output/stick_person.mp4;
